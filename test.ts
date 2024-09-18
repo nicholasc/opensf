@@ -10,16 +10,6 @@ interface Module {
 
 type Prototyped = { new (...args: any[]): {} };
 
-declare global {
-  interface Array<T> {
-    swap(a: number, b: number): void;
-  }
-}
-
-Array.prototype.swap = function (a: number, b: number): void {
-  [this[a], this[b]] = [this[b], this[a]];
-};
-
 //////
 ////// END UTILS
 //////
@@ -73,7 +63,7 @@ function after(target: Function): Priority {
     const tid = priority.indexOf((target as System).id);
 
     if (cid < tid) {
-      priority.swap(cid, tid);
+      [priority[cid], priority[tid]] = [priority[tid], priority[cid]];
     }
   };
 }
@@ -144,7 +134,7 @@ class Scheduler {
         }
       );
 
-      system.apply(null, [...resources]);
+      system(...resources);
     }
   }
 
@@ -169,7 +159,9 @@ class IAM {
 }
 
 class Testa implements Module {
-  configure(): void {}
+  configure(): void {
+    console.log("Configure");
+  }
 
   @system([after(Testa.prototype.execute)])
   public afterExecute(test: IAM) {
