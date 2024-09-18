@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "reflect-metadata": "^0.2.2",
+    "tslog": "^4.9.3"
+  }
+}
