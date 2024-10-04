@@ -4,7 +4,8 @@
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "types": [
-        "reflect-metadata"
+        "bun",
+        "reflect-metadata",
       ]
     }
   }
